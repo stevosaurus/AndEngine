@@ -91,7 +91,12 @@ public class TextureWarmUpVertexBufferObject extends VertexBufferObject {
 	protected void onBufferData() {
 		GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.mByteBuffer.limit(), this.mByteBuffer, this.mUsage);
 	}
-
+	
+	@Override
+	protected void onBufferDataSubset(int pOffset, int pLength) {
+		GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.mByteBuffer.limit(), this.mByteBuffer, this.mUsage);
+	}
+	
 	public void warmup(final GLState pGLState, final ITexture pTexture) {
 		pTexture.bind(pGLState);
 		this.bind(pGLState, PositionTextureCoordinatesShaderProgram.getInstance());
@@ -109,6 +114,7 @@ public class TextureWarmUpVertexBufferObject extends VertexBufferObject {
 
 		this.unbind(pGLState, PositionTextureCoordinatesShaderProgram.getInstance());
 	}
+
 
 	// ===========================================================
 	// Methods
