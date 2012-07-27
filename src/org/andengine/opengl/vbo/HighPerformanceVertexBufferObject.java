@@ -88,9 +88,11 @@ public class HighPerformanceVertexBufferObject extends VertexBufferObject {
 			this.mFloatBuffer.position(0);
 			this.mFloatBuffer.put(this.mBufferData);
 			
+//			GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.mByteBuffer.capacity(), null, this.mUsage);
 			GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.mByteBuffer.capacity(), this.mByteBuffer, this.mUsage);
 		} else {
 			BufferUtils.put(this.mByteBuffer, this.mBufferData, this.mBufferData.length, 0);
+//			GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.mByteBuffer.capacity(), null, this.mUsage);
 			GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, this.mByteBuffer.limit(), this.mByteBuffer, this.mUsage);
 		}
 	}
@@ -102,7 +104,7 @@ public class HighPerformanceVertexBufferObject extends VertexBufferObject {
 			// TODO Check if this is similar fast or faster than the non Honeycomb codepath.
 			this.mFloatBuffer.position(0);
 			this.mFloatBuffer.put(this.mBufferData, pOffset, pLength);
-
+			
 			GLES20.glBufferSubData(GLES20.GL_ARRAY_BUFFER, pOffset * DataConstants.BYTES_PER_FLOAT, pLength * DataConstants.BYTES_PER_FLOAT, this.mByteBuffer);
 		} else {
 			BufferUtils.putSub(this.mByteBuffer, this.mBufferData, pLength, pOffset);
